@@ -1,5 +1,4 @@
 from django.db import models
-from likes.models import Likes
 
 # Create your models here.
 
@@ -9,5 +8,7 @@ class Song(models.Model):
     album = models.CharField(max_length=255)
     release_date = models.DateField()
     genre = models.CharField(max_length=255)
-    likes = models.ForeignKey(Likes, on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
 
+    def likes_count(self):
+        return self.likes.all().count()
